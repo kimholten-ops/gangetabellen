@@ -109,23 +109,90 @@ margin-top: 2px;
 /* ── Screens ── */
 .screen { display: none; flex-direction: column; flex: 1; min-height: 0; }
 .screen.active { display: flex; }
-#selectScreen, #resultScreen { overflow-y: auto; }
-#quizScreen { overflow: hidden; }
+#selectScreen { overflow-y: auto; justify-content: center; }
+#resultScreen { overflow-y: auto; justify-content: center; }
+#quizScreen { overflow: hidden; justify-content: center; }
 
 /* ── Selection Screen ── */
-.selection-label {
+.hero-card {
+flex-shrink: 0;
+margin-bottom: 10px;
+}
+
+.owl-scene {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 12px;
+padding: 8px 0;
+}
+
+.owl-svg {
+flex-shrink: 0;
+animation: owl-bob 3s ease-in-out infinite;
+filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+}
+
+@keyframes owl-bob {
+0%, 100% { transform: translateY(0) rotate(0deg); }
+25% { transform: translateY(-4px) rotate(-2deg); }
+75% { transform: translateY(-2px) rotate(2deg); }
+}
+
+.speech-bubble {
+background: #FFFFFF;
+border-radius: 18px;
+padding: 12px 16px;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 600;
-font-size: 1.15rem;
-margin: 16px 0 12px;
+font-size: 0.95rem;
+color: #2D2B3D;
+line-height: 1.4;
+box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+position: relative;
+max-width: 180px;
+}
+.speech-bubble::before {
+content: ‘’;
+position: absolute;
+left: -8px;
+top: 50%;
+transform: translateY(-50%);
+width: 0; height: 0;
+border-top: 8px solid transparent;
+border-bottom: 8px solid transparent;
+border-right: 10px solid #FFFFFF;
+}
+
+.select-card {
+background: #FFFFFF;
+border-radius: 24px;
+padding: 20px 16px;
+box-shadow: 0 8px 40px rgba(45,43,61,0.12);
+flex-shrink: 0;
+}
+
+.selection-label {
+font-family: ‘Fredoka’, sans-serif;
+font-weight: 700;
+font-size: 1.2rem;
+margin: 0 0 2px;
 text-align: center;
+color: #2D2B3D;
+}
+
+.selection-sub {
+text-align: center;
+font-size: 0.82rem;
+color: #8886A0;
+margin-bottom: 12px;
 }
 
 .select-actions {
 display: flex;
 gap: 8px;
 justify-content: center;
-margin-bottom: 16px;
+margin-bottom: 14px;
 }
 .select-actions button {
 font-family: ‘Nunito’, sans-serif;
@@ -148,7 +215,19 @@ color: #fff;
 display: grid;
 grid-template-columns: repeat(5, 1fr);
 gap: 10px;
-margin-bottom: 20px;
+margin-bottom: 12px;
+}
+
+.selection-info {
+text-align: center;
+font-size: 0.82rem;
+font-weight: 600;
+color: #8886A0;
+min-height: 18px;
+transition: all 0.2s;
+}
+.selection-info.active {
+color: #4D96FF;
 }
 
 .table-btn {
@@ -188,39 +267,6 @@ transform: scale(1.02);
 .table-btn.selected::after { opacity: 0; }
 .table-btn:active { transform: scale(0.95); }
 
-.question-count {
-text-align: center;
-margin-bottom: 16px;
-}
-.question-count label {
-font-weight: 700;
-font-size: 0.9rem;
-color: #8886A0;
-}
-.count-selector {
-display: flex;
-gap: 8px;
-justify-content: center;
-margin-top: 8px;
-}
-.count-btn {
-font-family: ‘Nunito’, sans-serif;
-font-weight: 700;
-font-size: 0.95rem;
-padding: 8px 18px;
-border-radius: 12px;
-border: 2px solid #E8E6F0;
-background: #FFFFFF;
-color: #2D2B3D;
-cursor: pointer;
-transition: all 0.2s;
-}
-.count-btn.selected {
-border-color: #4D96FF;
-background: #4D96FF;
-color: #fff;
-}
-
 .start-btn {
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 700;
@@ -233,7 +279,7 @@ color: #fff;
 cursor: pointer;
 box-shadow: 0 6px 24px rgba(255,107,74,0.35);
 transition: all 0.25s;
-margin-top: auto;
+margin-top: 20px;
 letter-spacing: 0.5px;
 }
 .start-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,107,74,0.45); }
@@ -635,7 +681,6 @@ display: grid;
 grid-template-columns: repeat(3, 1fr);
 gap: 8px;
 width: 100%;
-margin-top: auto;
 padding: 8px 0 0;
 flex-shrink: 0;
 }
@@ -763,20 +808,69 @@ min-height: 0;
   <!-- ── SELECTION SCREEN ── -->
 
   <div id="selectScreen" class="screen active">
-    <p class="selection-label">Velg gangetabeller:</p>
-    <div class="select-actions">
-      <button onclick="selectAll()">Velg alle</button>
-      <button onclick="deselectAll()">Fjern alle</button>
+    <div class="hero-card">
+      <div class="owl-scene">
+        <svg class="owl-svg" viewBox="0 0 200 200" width="120" height="120">
+          <!-- Body -->
+          <ellipse cx="100" cy="130" rx="55" ry="50" fill="#8B6F5E"/>
+          <!-- Belly -->
+          <ellipse cx="100" cy="140" rx="35" ry="32" fill="#F5E6D3"/>
+          <!-- Head -->
+          <circle cx="100" cy="80" r="45" fill="#A0826D"/>
+          <!-- Ear tufts -->
+          <polygon points="65,50 55,20 80,55" fill="#8B6F5E"/>
+          <polygon points="135,50 145,20 120,55" fill="#8B6F5E"/>
+          <!-- Eye whites -->
+          <circle cx="82" cy="78" r="18" fill="#FFFFFF"/>
+          <circle cx="118" cy="78" r="18" fill="#FFFFFF"/>
+          <!-- Pupils -->
+          <circle cx="85" cy="78" r="10" fill="#2D2B3D">
+            <animate attributeName="cx" values="85;83;85;87;85" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="121" cy="78" r="10" fill="#2D2B3D">
+            <animate attributeName="cx" values="121;119;121;123;121" dur="4s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Eye shine -->
+          <circle cx="88" cy="74" r="3.5" fill="#FFFFFF"/>
+          <circle cx="124" cy="74" r="3.5" fill="#FFFFFF"/>
+          <!-- Beak -->
+          <polygon points="100,90 93,100 107,100" fill="#FFB347" stroke="#E89830" stroke-width="1"/>
+          <!-- Blush -->
+          <ellipse cx="68" cy="92" rx="8" ry="5" fill="#FFB5B5" opacity="0.5"/>
+          <ellipse cx="132" cy="92" rx="8" ry="5" fill="#FFB5B5" opacity="0.5"/>
+          <!-- Feet -->
+          <ellipse cx="82" cy="178" rx="14" ry="6" fill="#FFB347"/>
+          <ellipse cx="118" cy="178" rx="14" ry="6" fill="#FFB347"/>
+          <!-- Wings -->
+          <path d="M48,110 Q30,130 50,160 Q55,145 55,130Z" fill="#7A6050"/>
+          <path d="M152,110 Q170,130 150,160 Q145,145 145,130Z" fill="#7A6050"/>
+          <!-- Graduation cap -->
+          <rect x="72" y="38" width="56" height="6" rx="2" fill="#2D2B3D"/>
+          <polygon points="100,42 75,44 100,55 125,44" fill="#2D2B3D"/>
+          <line x1="125" y1="44" x2="130" y2="58" stroke="#FFD93D" stroke-width="2"/>
+          <circle cx="130" cy="60" r="3" fill="#FFD93D"/>
+        </svg>
+        <div class="speech-bubble">
+          Klar for å øve<br>på gangetabellen? 🎯
+        </div>
+      </div>
     </div>
-    <div class="table-grid" id="tableGrid"></div>
 
 ```
-<div class="question-count">
-  <label>Antall spørsmål:</label>
-  <div class="count-selector" id="countSelector"></div>
+<div class="select-card">
+  <p class="selection-label">Velg gangetabeller</p>
+  <p class="selection-sub">10 spørsmål per tabell — velg så mange du vil!</p>
+  <div class="select-actions">
+    <button onclick="selectAll()">Velg alle</button>
+    <button onclick="deselectAll()">Fjern alle</button>
+  </div>
+  <div class="table-grid" id="tableGrid"></div>
+  <p class="selection-info" id="selectionInfo">Velg minst én tabell for å starte</p>
 </div>
 
-<button class="start-btn" id="startBtn" onclick="startQuiz()" disabled>Start quiz!</button>
+<button class="start-btn" id="startBtn" onclick="startQuiz()" disabled>
+  <span id="startBtnText">Start quiz!</span>
+</button>
 ```
 
   </div>
@@ -870,7 +964,6 @@ min-height: 0;
 <script>
   // ── State ──
   let selectedTables = new Set();
-  let questionCount = 10;
   let questions = [];
   let currentQ = 0;
   let correct = 0;
@@ -881,7 +974,6 @@ min-height: 0;
   let answered = false;
   let hintsLeft = 3;
 
-  const counts = [5, 10, 15, 20];
   const encouragements = ['Fantastisk!', 'Helt riktig!', 'Supert!', 'Bra jobba!', 'Knallbra!', 'Perfekt!', 'Wow!', 'Ja!'];
   const wrongMessages = ['Nesten!', 'Ikke helt…', 'Prøv igjen neste gang!', 'Øvelse gjør mester!'];
 
@@ -895,19 +987,23 @@ min-height: 0;
       btn.onclick = () => toggleTable(i, btn);
       grid.appendChild(btn);
     }
+  }
 
-    const cs = document.getElementById('countSelector');
-    counts.forEach(c => {
-      const btn = document.createElement('button');
-      btn.className = 'count-btn' + (c === 10 ? ' selected' : '');
-      btn.textContent = c;
-      btn.onclick = () => {
-        questionCount = c;
-        cs.querySelectorAll('.count-btn').forEach(b => b.classList.remove('selected'));
-        btn.classList.add('selected');
-      };
-      cs.appendChild(btn);
-    });
+  function updateSelectionInfo() {
+    const count = selectedTables.size;
+    const info = document.getElementById('selectionInfo');
+    const btnText = document.getElementById('startBtnText');
+    document.getElementById('startBtn').disabled = count === 0;
+    if (count === 0) {
+      info.textContent = 'Velg minst én tabell for å starte';
+      info.classList.remove('active');
+      btnText.textContent = 'Start quiz!';
+    } else {
+      const total = count * 10;
+      info.textContent = `${count} ${count === 1 ? 'tabell' : 'tabeller'} valgt — ${total} spørsmål`;
+      info.classList.add('active');
+      btnText.textContent = `Start quiz — ${total} spørsmål!`;
+    }
   }
 
   function toggleTable(n, btn) {
@@ -918,7 +1014,7 @@ min-height: 0;
       selectedTables.add(n);
       btn.classList.add('selected');
     }
-    document.getElementById('startBtn').disabled = selectedTables.size === 0;
+    updateSelectionInfo();
   }
 
   function selectAll() {
@@ -926,7 +1022,7 @@ min-height: 0;
       selectedTables.add(i + 1);
       btn.classList.add('selected');
     });
-    document.getElementById('startBtn').disabled = false;
+    updateSelectionInfo();
   }
 
   function deselectAll() {
@@ -934,7 +1030,7 @@ min-height: 0;
       selectedTables.delete(i + 1);
       btn.classList.remove('selected');
     });
-    document.getElementById('startBtn').disabled = true;
+    updateSelectionInfo();
   }
 
   // ── Quiz Logic ──
@@ -950,14 +1046,14 @@ min-height: 0;
       const j = Math.floor(Math.random() * (i + 1));
       [pool[i], pool[j]] = [pool[j], pool[i]];
     }
-    return pool.slice(0, questionCount);
+    return pool;
   }
 
   function startQuiz() {
     questions = generateQuestions();
     currentQ = 0; correct = 0; wrong = 0; streak = 0; bestStreak = 0;
     wrongAnswers = [];
-    hintsLeft = 3;
+    hintsLeft = selectedTables.size;
     updateHintBtn();
     showScreen('quizScreen');
     showQuestion();
