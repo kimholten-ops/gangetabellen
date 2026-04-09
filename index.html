@@ -4,10 +4,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light only">
 <title>Gangetabell-Quiz</title>
 <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light only;
     --bg: #FFF8F0;
     --card: #FFFFFF;
     --primary: #FF6B4A;
@@ -28,10 +31,15 @@
 
 - { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+html {
+background-color: #FFF8F0 !important;
+}
+
 body {
 font-family: ‘Nunito’, sans-serif;
-background: var(–bg);
-color: var(–text);
+background: #FFF8F0 !important;
+background-color: #FFF8F0 !important;
+color: #2D2B3D !important;
 min-height: 100dvh;
 overflow-x: hidden;
 }
@@ -47,13 +55,13 @@ pointer-events: none;
 }
 body::before {
 width: 300px; height: 300px;
-background: var(–accent-1);
+background: #FFD93D;
 top: -80px; right: -80px;
 animation: float 8s ease-in-out infinite;
 }
 body::after {
 width: 200px; height: 200px;
-background: var(–accent-3);
+background: #4D96FF;
 bottom: -60px; left: -60px;
 animation: float 10s ease-in-out infinite reverse;
 }
@@ -83,13 +91,13 @@ padding: 16px 0 12px;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 700;
 font-size: 2rem;
-background: linear-gradient(135deg, var(–primary), var(–accent-4));
+background: linear-gradient(135deg, #FF6B4A, #FF6B9D);
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 }
 .header p {
-color: var(–text-light);
+color: #8886A0;
 font-size: 0.95rem;
 margin-top: 2px;
 }
@@ -119,14 +127,14 @@ font-weight: 700;
 font-size: 0.82rem;
 padding: 6px 16px;
 border-radius: 20px;
-border: 2px solid var(–primary);
+border: 2px solid #FF6B4A;
 background: transparent;
-color: var(–primary);
+color: #FF6B4A;
 cursor: pointer;
 transition: all 0.2s;
 }
 .select-actions button:hover {
-background: var(–primary);
+background: #FF6B4A;
 color: #fff;
 }
 
@@ -141,11 +149,11 @@ margin-bottom: 20px;
 aspect-ratio: 1;
 border-radius: 16px;
 border: 2.5px solid #E8E6F0;
-background: var(–card);
+background: #FFFFFF;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 600;
 font-size: 1.5rem;
-color: var(–text);
+color: #2D2B3D;
 cursor: pointer;
 transition: all 0.2s;
 box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -161,12 +169,12 @@ content: ‘×’;
 position: absolute;
 top: 2px; right: 6px;
 font-size: 0.7rem;
-color: var(–text-light);
+color: #8886A0;
 opacity: 0.5;
 }
 .table-btn.selected {
-border-color: var(–primary);
-background: linear-gradient(135deg, var(–primary), var(–primary-light));
+border-color: #FF6B4A;
+background: linear-gradient(135deg, #FF6B4A, #FF8A70);
 color: #fff;
 box-shadow: 0 4px 16px rgba(255,107,74,0.3);
 transform: scale(1.02);
@@ -181,7 +189,7 @@ margin-bottom: 16px;
 .question-count label {
 font-weight: 700;
 font-size: 0.9rem;
-color: var(–text-light);
+color: #8886A0;
 }
 .count-selector {
 display: flex;
@@ -196,14 +204,14 @@ font-size: 0.95rem;
 padding: 8px 18px;
 border-radius: 12px;
 border: 2px solid #E8E6F0;
-background: var(–card);
-color: var(–text);
+background: #FFFFFF;
+color: #2D2B3D;
 cursor: pointer;
 transition: all 0.2s;
 }
 .count-btn.selected {
-border-color: var(–accent-3);
-background: var(–accent-3);
+border-color: #4D96FF;
+background: #4D96FF;
 color: #fff;
 }
 
@@ -214,7 +222,7 @@ font-size: 1.2rem;
 padding: 16px;
 border: none;
 border-radius: 20px;
-background: linear-gradient(135deg, var(–primary), var(–accent-4));
+background: linear-gradient(135deg, #FF6B4A, #FF6B9D);
 color: #fff;
 cursor: pointer;
 box-shadow: 0 6px 24px rgba(255,107,74,0.35);
@@ -242,7 +250,7 @@ overflow: hidden;
 .progress-fill {
 height: 100%;
 border-radius: 4px;
-background: linear-gradient(90deg, var(–accent-3), var(–accent-2));
+background: linear-gradient(90deg, #4D96FF, #6BCB77);
 transition: width 0.4s ease;
 }
 
@@ -251,7 +259,7 @@ display: flex;
 justify-content: space-between;
 font-weight: 700;
 font-size: 0.85rem;
-color: var(–text-light);
+color: #8886A0;
 margin-bottom: 24px;
 }
 
@@ -260,15 +268,15 @@ display: flex;
 align-items: center;
 gap: 4px;
 }
-.score-display .correct-count { color: var(–correct); }
-.score-display .wrong-count { color: var(–wrong); }
+.score-display .correct-count { color: #4ECB71; }
+.score-display .wrong-count { color: #FF5A5A; }
 
 .question-card {
-background: var(–card);
+background: #FFFFFF;
 border-radius: 24px;
 padding: 32px 24px;
 text-align: center;
-box-shadow: var(–shadow-lg);
+box-shadow: 0 8px 40px rgba(45,43,61,0.12);
 margin-bottom: 24px;
 animation: slideUp 0.35s ease;
 }
@@ -282,19 +290,19 @@ to { opacity: 1; transform: translateY(0); }
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 700;
 font-size: 2.8rem;
-color: var(–text);
+color: #2D2B3D;
 line-height: 1.2;
 }
 .question-text .operator {
-color: var(–primary);
+color: #FF6B4A;
 margin: 0 4px;
 }
 .question-text .equals {
-color: var(–accent-3);
+color: #4D96FF;
 margin: 0 4px;
 }
 .question-text .qmark {
-color: var(–accent-1);
+color: #FFD93D;
 font-size: 3rem;
 }
 
@@ -315,21 +323,21 @@ text-align: center;
 padding: 10px 16px;
 border: 3px solid #E8E6F0;
 border-radius: 16px;
-background: var(–bg);
-color: var(–text);
+background: #FFF8F0;
+color: #2D2B3D;
 outline: none;
 transition: border-color 0.2s;
 -moz-appearance: textfield;
 }
-.answer-input:focus { border-color: var(–accent-3); }
-.answer-input.correct { border-color: var(–correct); background: var(–correct-light); }
-.answer-input.wrong { border-color: var(–wrong); background: var(–wrong-light); }
+.answer-input:focus { border-color: #4D96FF; }
+.answer-input.correct { border-color: #4ECB71; background: #E8F9ED; }
+.answer-input.wrong { border-color: #FF5A5A; background: #FFE8E8; }
 
 .submit-btn {
 width: 56px; height: 56px;
 border-radius: 50%;
 border: none;
-background: linear-gradient(135deg, var(–accent-3), var(–accent-2));
+background: linear-gradient(135deg, #4D96FF, #6BCB77);
 color: #fff;
 font-size: 1.5rem;
 cursor: pointer;
@@ -352,24 +360,24 @@ min-height: 36px;
 margin-bottom: 12px;
 transition: all 0.2s;
 }
-.feedback.correct { color: var(–correct); }
-.feedback.wrong { color: var(–wrong); }
+.feedback.correct { color: #4ECB71; }
+.feedback.wrong { color: #FF5A5A; }
 
 .streak {
 text-align: center;
 font-size: 0.85rem;
-color: var(–text-light);
+color: #8886A0;
 font-weight: 600;
 }
 .streak .fire { font-size: 1rem; }
 
 /* ── Result Screen ── */
 .result-card {
-background: var(–card);
+background: #FFFFFF;
 border-radius: 24px;
 padding: 36px 24px;
 text-align: center;
-box-shadow: var(–shadow-lg);
+box-shadow: 0 8px 40px rgba(45,43,61,0.12);
 margin: 20px 0;
 animation: slideUp 0.4s ease;
 }
@@ -387,7 +395,7 @@ margin-bottom: 4px;
 }
 
 .result-subtitle {
-color: var(–text-light);
+color: #8886A0;
 font-size: 0.95rem;
 margin-bottom: 20px;
 }
@@ -400,7 +408,7 @@ margin-bottom: 8px;
 }
 
 .stat-box {
-background: var(–bg);
+background: #FFF8F0;
 border-radius: 16px;
 padding: 14px 8px;
 }
@@ -412,25 +420,25 @@ font-size: 1.8rem;
 .stat-box .label {
 font-size: 0.75rem;
 font-weight: 700;
-color: var(–text-light);
+color: #8886A0;
 text-transform: uppercase;
 letter-spacing: 0.5px;
 }
-.stat-box.green .num { color: var(–correct); }
-.stat-box.red .num { color: var(–wrong); }
-.stat-box.blue .num { color: var(–accent-3); }
+.stat-box.green .num { color: #4ECB71; }
+.stat-box.red .num { color: #FF5A5A; }
+.stat-box.blue .num { color: #4D96FF; }
 
 .wrong-list {
 text-align: left;
 margin: 16px 0;
-background: var(–wrong-light);
+background: #FFE8E8;
 border-radius: 16px;
 padding: 16px;
 }
 .wrong-list h3 {
 font-family: ‘Fredoka’, sans-serif;
 font-size: 0.95rem;
-color: var(–wrong);
+color: #FF5A5A;
 margin-bottom: 8px;
 }
 .wrong-list ul {
@@ -446,7 +454,7 @@ padding: 4px 12px;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 600;
 font-size: 0.95rem;
-color: var(–text);
+color: #2D2B3D;
 }
 
 .result-actions {
@@ -466,13 +474,13 @@ cursor: pointer;
 transition: all 0.2s;
 }
 .btn-again {
-background: linear-gradient(135deg, var(–primary), var(–accent-4));
+background: linear-gradient(135deg, #FF6B4A, #FF6B9D);
 color: #fff;
 box-shadow: 0 4px 16px rgba(255,107,74,0.3);
 }
 .btn-home {
 background: #E8E6F0;
-color: var(–text);
+color: #2D2B3D;
 }
 
 /* ── Quiz Top Bar ── */
@@ -484,7 +492,7 @@ margin-bottom: 8px;
 }
 
 .icon-btn {
-background: var(–card);
+background: #FFFFFF;
 border: 2px solid #E8E6F0;
 border-radius: 14px;
 cursor: pointer;
@@ -498,10 +506,10 @@ transition: all 0.15s;
 
 .back-icon {
 width: 44px; height: 44px;
-color: var(–text-light);
+color: #8886A0;
 padding: 0;
 }
-.back-icon:active { color: var(–primary); }
+.back-icon:active { color: #FF6B4A; }
 
 .hint-btn {
 height: 44px;
@@ -520,8 +528,8 @@ pointer-events: none;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 700;
 font-size: 0.9rem;
-color: var(–text);
-background: var(–accent-1);
+color: #2D2B3D;
+background: #FFD93D;
 width: 22px; height: 22px;
 border-radius: 50%;
 display: flex;
@@ -551,10 +559,10 @@ to { opacity: 1; }
 }
 
 .hint-card {
-background: var(–card);
+background: #FFFFFF;
 border-radius: 24px;
 padding: 20px 20px 24px;
-box-shadow: var(–shadow-lg);
+box-shadow: 0 8px 40px rgba(45,43,61,0.12);
 max-width: 340px;
 width: 100%;
 animation: slideUp 0.25s ease;
@@ -570,14 +578,14 @@ margin-bottom: 16px;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 700;
 font-size: 1.15rem;
-color: var(–text);
+color: #2D2B3D;
 }
 .hint-close {
 width: 32px; height: 32px;
 border-radius: 50%;
 border: none;
 background: #F0EEF6;
-color: var(–text-light);
+color: #8886A0;
 font-size: 1rem;
 cursor: pointer;
 display: flex;
@@ -596,8 +604,8 @@ gap: 6px;
 font-family: ‘Fredoka’, sans-serif;
 font-weight: 500;
 font-size: 1.05rem;
-color: var(–text);
-background: var(–bg);
+color: #2D2B3D;
+background: #FFF8F0;
 border-radius: 10px;
 padding: 8px 14px;
 text-align: center;
@@ -605,7 +613,7 @@ text-align: center;
 .hint-row.highlight {
 background: linear-gradient(135deg, rgba(255,107,74,0.12), rgba(255,107,157,0.12));
 font-weight: 700;
-color: var(–primary);
+color: #FF6B4A;
 }
 
 /* ── Custom Numpad ── */
@@ -625,8 +633,8 @@ font-size: 1.6rem;
 padding: 14px 0;
 border: 2.5px solid #E8E6F0;
 border-radius: 16px;
-background: var(–card);
-color: var(–text);
+background: #FFFFFF;
+color: #2D2B3D;
 cursor: pointer;
 transition: all 0.12s;
 box-shadow: 0 2px 8px rgba(0,0,0,0.04);
@@ -642,9 +650,9 @@ background: #F0EEF6;
 }
 .numpad-btn.action-delete {
 font-size: 1.4rem;
-color: var(–wrong);
+color: #FF5A5A;
 border-color: rgba(255,90,90,0.2);
-background: var(–wrong-light);
+background: #FFE8E8;
 }
 .numpad-btn.action-delete:active {
 background: #ffd4d4;
@@ -653,7 +661,7 @@ background: #ffd4d4;
 font-size: 1.3rem;
 font-weight: 700;
 color: #fff;
-background: linear-gradient(135deg, var(–accent-3), var(–accent-2));
+background: linear-gradient(135deg, #4D96FF, #6BCB77);
 border-color: transparent;
 box-shadow: 0 4px 16px rgba(77,150,255,0.25);
 }
